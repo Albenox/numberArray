@@ -29,6 +29,15 @@ public:
     // Accessor function that will return a number from the array if the index is valid
     double getNumber(int index) const;
 
+    // Accessor function that returns the smallest number in the array
+    double getMin() const;
+
+    // Accessor function that returns the largest number in the array
+    double getMax() const;
+
+    // Accessor function that returns the average of all numbers in the array
+    double getAverage() const;
+
     void print() const;
 };
 

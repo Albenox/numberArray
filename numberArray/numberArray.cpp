@@ -54,9 +54,47 @@ double NumberArray::getNumber(int index) const {
     }
 }
 
+// Accessor function that returns the smallest number in the array
+double NumberArray::getMin() const {
+    double min = data[0];
+
+    for (int i = 1; i < size; i++) {
+        if (data[i] < min) {
+            min = data[i];
+        }
+    }
+
+    return min;
+}
+
+// Accessor function that returns the largest number in the array
+double NumberArray::getMax() const {
+    double max = data[0];
+
+    for (int i = 1; i < size; i++) {
+        if (data[i] > max) {
+            max = data[i];
+        }
+    }
+
+    return max;
+}
+
+// Accessor function that returns the average of all numbers in the array
+double NumberArray::getAverage() const {
+    double total = 0.0;
+
+    for (int i = 0; i < size; i++) {
+        total += data[i];
+    }
+
+    return total / size;
+}
+
 // A void function to print all of the array contents
 void NumberArray::print() const {
-    cout << "Number Array " << arrayCount << ": ";
+    cout << "Number Array " << arrayID << ": ";
+
     for (int i = 0; i < size; i++) {
         cout << data[i] << " ";
     }

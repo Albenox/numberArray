@@ -46,10 +46,15 @@ int main() {
 
     printSeperator();
 
+    // Testing the statistical functions with the current values inside numbers2
+    cout << "Minimum value: " << numbers2.getMin() << endl;
+    cout << "Maximum value: " << numbers2.getMax() << endl;
+    cout << "Average value: " << numbers2.getAverage() << endl;
+
     return 0;
 }
 
 // A simple cout print function to make it easier to read the cmd output
 void printSeperator() {
-    cout << endl << "------------------------------------------" << endl << endl;
+    cout << "------------------------------------------" << endl;
 }
