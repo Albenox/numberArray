@@ -10,16 +10,26 @@ private:
     // A default array size in case one is not defined
     static const int MAX_SIZE = 10;
 
+    // Variables that set arrays to have IDs, so they can be identified during printing
+    static int arrayCount;
+    int arrayID;
+
     // Dynamic memory size for the array using a pointer for data
     int size;
     double* data;
 
 public:
-    // Constructor and Deconstructor
+    // Constructor and Destructor, which holds the code that runs once an object is created and once it is destroyed 
     NumberArray(int s = MAX_SIZE);
     ~NumberArray();
+
+    // Mutator function that will set/change a number in the array if the index is valid
+    void setNumber(int index, double value);
+
+    // Accessor function that will return a number from the array if the index is valid
+    double getNumber(int index) const;
 
     void print() const;
 };
 
-#endif#
+#endif
