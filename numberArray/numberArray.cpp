@@ -1,8 +1,9 @@
 // numberArray.cpp
 // This file will contain the logic for the methods used in the NumberArray class
 
-#include "NumberArray.h"
+#include "numberArray.h"
 #include <iostream>
+#include <random>
 using namespace std;
 
 // Sets the counter of arrays to 0, which is used to give arrays IDs as they are made
@@ -40,6 +41,18 @@ void NumberArray::setNumber(int index, double value) {
     }
     else {
         cout << "Invalid index location called at " << index << ", input " << value << " cannot be assigned." << endl;
+    }
+}
+
+// Mutator function that fills the array with random decimal numbers between a minimum and maximum value
+void NumberArray::fillRandom(double minValue, double maxValue) {
+    // Generates a random number between the minimum and maximum entered limits which returns better results than just rand()
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_real_distribution<> distr(minValue, maxValue);
+
+    for (int i = 0; i < size; i++) {
+        data[i] = distr(gen);
     }
 }
 
@@ -96,7 +109,10 @@ void NumberArray::print() const {
     cout << "Number Array " << arrayID << ": ";
 
     for (int i = 0; i < size; i++) {
-        cout << data[i] << " ";
+        cout << data[i];
+        if (i < size - 1) {
+            cout << ", ";
+        }
     }
 
     cout << endl;

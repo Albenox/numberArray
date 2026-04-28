@@ -1,7 +1,7 @@
 // main.cpp
 // This file will contain the main() function used to test the NumberArray class and its methods
 
-#include "NumberArray.h"
+#include "numberArray.h"
 #include <iostream>
 using namespace std;
 
@@ -12,10 +12,12 @@ int main() {
     NumberArray numbers1;
     numbers1.print();
 
+    printSeperator();
+    
     NumberArray numbers2(5);
     numbers2.print();
 
-    printSeperator();
+    cout << endl;
 
     // Testing setNumber() with valid indexes
     numbers2.setNumber(0, 10.5);
@@ -25,31 +27,69 @@ int main() {
     // Printing the array again to confirm the values changed
     numbers2.print();
 
-    printSeperator();
+    cout << endl;
 
     // Testing getNumber() with valid indexes
     cout << "Number at index 0: " << numbers2.getNumber(0) << endl;
     cout << "Number at index 2: " << numbers2.getNumber(2) << endl;
     cout << "Number at index 4: " << numbers2.getNumber(4) << endl;
 
-    printSeperator();
+    cout << endl;
 
     // Testing invalid indexes to make sure the program does not crash
     numbers2.setNumber(-1, 50);
     numbers2.setNumber(5, 50);
 
-    printSeperator();
+    cout << endl;
 
     // Attempts to retrieve numbers from invalid index locations
     cout << "Invalid get test: " << numbers2.getNumber(-1) << endl;
     cout << "Invalid get test: " << numbers2.getNumber(5) << endl;
 
-    printSeperator();
+    cout << endl;
 
     // Testing the statistical functions with the current values inside numbers2
     cout << "Minimum value: " << numbers2.getMin() << endl;
     cout << "Maximum value: " << numbers2.getMax() << endl;
     cout << "Average value: " << numbers2.getAverage() << endl;
+
+    printSeperator();
+
+    // Testing random values inside a new NumberArray object
+    NumberArray randomNumbers(10);
+
+    randomNumbers.fillRandom(1.0, 100.0);
+
+    cout << "Randomly filled array:" << endl;
+    randomNumbers.print();
+
+    cout << "Minimum random value: " << randomNumbers.getMin() << endl;
+    cout << "Maximum random value: " << randomNumbers.getMax() << endl;
+    cout << "Average random value: " << randomNumbers.getAverage() << endl;
+
+    printSeperator();
+
+    // Testing an edge case where the array only has one element
+    NumberArray oneNumber(1);
+
+    oneNumber.setNumber(0, -3.5);
+    oneNumber.print();
+
+    cout << "Minimum value: " << oneNumber.getMin() << endl;
+    cout << "Maximum value: " << oneNumber.getMax() << endl;
+    cout << "Average value: " << oneNumber.getAverage() << endl;
+
+    printSeperator();
+    
+    // Testing destructor behavior inside a block scope
+    {
+        NumberArray temp(5);
+        temp.print();
+    }
+
+    cout << "The temporary array above should have already called its destructor." << endl;
+
+    printSeperator();
 
     return 0;
 }

@@ -29,6 +29,9 @@ public:
     // Accessor function that will return a number from the array if the index is valid
     double getNumber(int index) const;
 
+    // Mutator function that fills the array with random decimal numbers between a minimum and maximum value
+    void fillRandom(double minValue, double maxValue);
+
     // Accessor function that returns the smallest number in the array
     double getMin() const;
 
