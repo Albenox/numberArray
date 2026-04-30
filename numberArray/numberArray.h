@@ -23,6 +23,9 @@ public:
     NumberArray(int s = MAX_SIZE);
     ~NumberArray();
 
+    // Copy constructor that creates a deep copy of another NumberArray object
+    NumberArray(const NumberArray& other);
+
     // Mutator function that will set/change a number in the array if the index is valid
     void setNumber(int index, double value);
 

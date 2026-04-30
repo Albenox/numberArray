@@ -26,6 +26,26 @@ NumberArray::NumberArray(int s) {
     }
 }
 
+// Copy constructor that performs a deep copy of another NumberArray object
+NumberArray::NumberArray(const NumberArray& other) {
+    // Copies the size from the object being copied
+    size = other.size;
+
+    // Gives this copied object its own new array ID
+    arrayCount++;
+    arrayID = arrayCount;
+
+    // Allocates new memory for this object's own array
+    data = new double[size];
+
+    // Copies each value from the other object's array into this object's array
+    for (int i = 0; i < size; i++) {
+        data[i] = other.data[i];
+    }
+
+    cout << "Copy constructor called. Number Array " << arrayID << " was created as a copy." << endl;
+}
+
 // Destructor that deletes the array data from the memory to avoid memory leaks
 NumberArray::~NumberArray() {
     delete[] data;

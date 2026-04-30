@@ -91,6 +91,34 @@ int main() {
 
     printSeperator();
 
+    // Copy constructor testing
+    cout << "Copy Constructor Test:" << endl;
+
+    NumberArray original(5);
+    original.setNumber(0, 10);
+    original.setNumber(1, 20);
+    original.setNumber(2, 30);
+
+    cout << "Original array before copy:" << endl;
+    original.print();
+
+    // This creates a new object by copying original
+    NumberArray copiedArray(original);
+
+    cout << "Copied array after copy constructor:" << endl;
+    copiedArray.print();
+
+    // Change original after copying to prove copiedArray has its own memory
+    original.setNumber(0, 999);
+
+    cout << "Original array after being changed:" << endl;
+    original.print();
+
+    cout << "Copied array should stay the same:" << endl;
+    copiedArray.print();
+
+    printSeperator();
+
     return 0;
 }
 
