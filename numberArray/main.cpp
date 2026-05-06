@@ -119,6 +119,48 @@ int main() {
 
     printSeperator();
 
+    // Assignment operator testing
+    cout << "Assignment Operator Test:" << endl;
+
+    NumberArray sourceArray(5);
+    sourceArray.setNumber(0, 11);
+    sourceArray.setNumber(1, 22);
+    sourceArray.setNumber(2, 33);
+
+    NumberArray assignedArray(3);
+
+    cout << "Source array before assignment:" << endl;
+    sourceArray.print();
+
+    cout << "Assigned array before assignment:" << endl;
+    assignedArray.print();
+
+    // This copies sourceArray into an already existing object
+    assignedArray = sourceArray;
+
+    cout << "Assigned array after assignment:" << endl;
+    assignedArray.print();
+
+    // Change sourceArray after assignment to prove assignedArray has its own memory
+    sourceArray.setNumber(0, 888);
+
+    cout << "Source array after being changed:" << endl;
+    sourceArray.print();
+
+    cout << "Assigned array should stay the same:" << endl;
+    assignedArray.print();
+
+    printSeperator();
+
+    cout << "Self-Assignment Test:" << endl;
+
+    assignedArray = assignedArray;
+
+    cout << "Assigned array after assigning it to itself:" << endl;
+    assignedArray.print();
+
+    printSeperator();
+
     return 0;
 }
 

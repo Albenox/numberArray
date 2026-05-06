@@ -46,6 +46,33 @@ NumberArray::NumberArray(const NumberArray& other) {
     cout << "Copy constructor called. Number Array " << arrayID << " was created as a copy." << endl;
 }
 
+// Assignment operator overload that performs a deep copy between existing NumberArray objects
+NumberArray& NumberArray::operator=(const NumberArray& other) {
+    // Checks if the object is being assigned to itself
+    if (this == &other) {
+        cout << "Self-assignment detected. No changes made." << endl;
+        return *this;
+    }
+
+    // Deletes the current array to avoid a memory leak before replacing it
+    delete[] data;
+
+    // Copies the size from the other object
+    size = other.size;
+
+    // Allocates new memory for this object's array
+    data = new double[size];
+
+    // Copies each value from the other object's array into this object's array
+    for (int i = 0; i < size; i++) {
+        data[i] = other.data[i];
+    }
+
+    cout << "Assignment operator called. Number Array " << arrayID << " was assigned new values." << endl;
+
+    return *this;
+}
+
 // Destructor that deletes the array data from the memory to avoid memory leaks
 NumberArray::~NumberArray() {
     delete[] data;

@@ -25,6 +25,9 @@ public:
 
     // Copy constructor that creates a deep copy of another NumberArray object
     NumberArray(const NumberArray& other);
+    
+    // Assignment operator overload that allows one existing NumberArray object to be assigned to another
+    NumberArray& operator=(const NumberArray& other);
 
     // Mutator function that will set/change a number in the array if the index is valid
     void setNumber(int index, double value);
