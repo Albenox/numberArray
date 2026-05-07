@@ -3,6 +3,7 @@
 
 #include "numberArray.h"
 #include <iostream>
+#include <stdexcept>
 using namespace std;
 
 // Function prototype for a simple separator line used to improve cmd readability
@@ -10,8 +11,10 @@ void printSeperator();
 
 int main() {
 
-    //
+    // --------------------------------------------------
     // Testing the NumberArray template class with int
+    // --------------------------------------------------
+
     cout << "Testing NumberArray<int>" << endl;
 
     // Creates an integer array object with a size of 5
@@ -43,8 +46,10 @@ int main() {
 
     printSeperator();
 
-    //
+    // --------------------------------------------------
     // Testing the NumberArray template class with double
+    // --------------------------------------------------
+
     cout << "Testing NumberArray<double>" << endl;
 
     // Creates a decimal array object with a size of 5
@@ -76,8 +81,37 @@ int main() {
 
     printSeperator();
 
-    //
+    // --------------------------------------------------
+    // Testing exception handling for invalid indexes
+    // --------------------------------------------------
+
+    cout << "Exception Handling Test" << endl;
+
+    // Tries to store a value at an invalid negative index
+    try {
+        intNumbers.setNumber(-1, 999);
+    }
+    catch (const out_of_range& e) {
+        cout << "Caught exception from setNumber(): " << e.what() << endl;
+    }
+
+    // Tries to get a value from an invalid index past the end of the array
+    try {
+        cout << intNumbers.getNumber(5) << endl;
+    }
+    catch (const out_of_range& e) {
+        cout << "Caught exception from getNumber(): " << e.what() << endl;
+    }
+
+    // This line proves the program keeps running after catching exceptions
+    cout << "Program continued after exception tests." << endl;
+
+    printSeperator();
+
+    // --------------------------------------------------
     // Testing randomly generated integer values
+    // --------------------------------------------------
+
     cout << "Testing random integer values" << endl;
 
     // Creates an integer array that will be filled with random values
@@ -98,8 +132,10 @@ int main() {
 
     printSeperator();
 
-    //
+    // --------------------------------------------------
     // Testing randomly generated double values
+    // --------------------------------------------------
+
     cout << "Testing random double values" << endl;
 
     // Creates a decimal array that will be filled with random values
@@ -120,8 +156,10 @@ int main() {
 
     printSeperator();
 
-    //
+    // --------------------------------------------------
     // Testing the copy constructor
+    // --------------------------------------------------
+
     cout << "Copy Constructor Test with NumberArray<int>" << endl;
 
     // Creates a new object by copying the intNumbers object
@@ -147,8 +185,10 @@ int main() {
 
     printSeperator();
 
-    //
+    // --------------------------------------------------
     // Testing the assignment operator
+    // --------------------------------------------------
+
     cout << "Assignment Operator Test with NumberArray<double>" << endl;
 
     // Creates another decimal array object with a different size
@@ -180,8 +220,10 @@ int main() {
 
     printSeperator();
 
-    //
+    // --------------------------------------------------
     // Testing self-assignment protection
+    // --------------------------------------------------
+
     cout << "Self-Assignment Test" << endl;
 
     // Assigns the object to itself to verify the program handles it safely
@@ -192,8 +234,10 @@ int main() {
 
     printSeperator();
 
-    //
+    // --------------------------------------------------
     // Testing destructor execution inside a block scope
+    // --------------------------------------------------
+
     cout << "Destructor Block Scope Test" << endl;
 
     // Creates a temporary object inside a block scope
