@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <random>
+#include <type_traits>
 using namespace std;
 
 template <typename T>
@@ -76,6 +77,53 @@ NumberArray<T>::NumberArray(int s) {
     }
 }
 
+// Copy constructor that performs a deep copy of another NumberArray object
+template <typename T>
+NumberArray<T>::NumberArray(const NumberArray<T>& other) {
+    size = other.size;
+
+    // Gives this copied object its own new array ID
+    arrayCount++;
+    arrayID = arrayCount;
+
+    // Allocates new memory for this object's own array
+    data = new T[size];
+
+    // Copies each value from the other object's array into this object's array
+    for (int i = 0; i < size; i++) {
+        data[i] = other.data[i];
+    }
+
+    cout << "Copy constructor called. Number Array " << arrayID << " was created as a copy." << endl;
+}
+
+// Assignment operator overload that performs a deep copy between existing NumberArray objects
+template <typename T>
+NumberArray<T>& NumberArray<T>::operator=(const NumberArray<T>& other) {
+    // Checks if the object is being assigned to itself
+    if (this == &other) {
+        cout << "Self-assignment detected. No changes made." << endl;
+        return *this;
+    }
+
+    // Deletes the current array to avoid a memory leak before replacing it
+    delete[] data;
+
+    size = other.size;
+
+    // Allocates new memory for this object's array
+    data = new T[size];
+
+    // Copies each value from the other object's array into this object's array
+    for (int i = 0; i < size; i++) {
+        data[i] = other.data[i];
+    }
+
+    cout << "Assignment operator called. Number Array " << arrayID << " was assigned new values." << endl;
+
+    return *this;
+}
+
 // Destructor that deletes the array data from the memory to avoid memory leaks
 template <typename T>
 NumberArray<T>::~NumberArray() {
@@ -93,6 +141,30 @@ void NumberArray<T>::setNumber(int index, T value) {
     }
     else {
         cout << "Invalid index location called at " << index << ", input " << value << " cannot be assigned." << endl;
+    }
+}
+
+// Mutator function that fills the array with random numbers between a minimum and maximum value
+template <typename T>
+void NumberArray<T>::fillRandom(T minValue, T maxValue) {
+    random_device rd;
+    mt19937 gen(rd());
+
+    // Uses integer random values if T is an integer type
+    if constexpr (is_integral<T>::value) {
+        uniform_int_distribution<> distr(minValue, maxValue);
+
+        for (int i = 0; i < size; i++) {
+            data[i] = distr(gen);
+        }
+    }
+    // Uses decimal random values if T is not an integer type
+    else {
+        uniform_real_distribution<> distr(minValue, maxValue);
+
+        for (int i = 0; i < size; i++) {
+            data[i] = distr(gen);
+        }
     }
 }
 

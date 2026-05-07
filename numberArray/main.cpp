@@ -1,163 +1,214 @@
 // main.cpp
-// This file will contain the main() function used to test the NumberArray class and its methods
+// This file will contain the main() function used to test the NumberArray template class and its methods
 
 #include "numberArray.h"
 #include <iostream>
 using namespace std;
 
+// Function prototype for a simple separator line used to improve cmd readability
 void printSeperator();
 
 int main() {
-    // Objects created by the NumberArray class that then use the print() function to print the stored numbers
-    NumberArray numbers1;
-    numbers1.print();
 
-    printSeperator();
-    
-    NumberArray numbers2(5);
-    numbers2.print();
+    //
+    // Testing the NumberArray template class with int
+    cout << "Testing NumberArray<int>" << endl;
 
-    cout << endl;
+    // Creates an integer array object with a size of 5
+    NumberArray<int> intNumbers(5);
 
-    // Testing setNumber() with valid indexes
-    numbers2.setNumber(0, 10.5);
-    numbers2.setNumber(2, 25.75);
-    numbers2.setNumber(4, 99.9);
+    // Assigns values into the integer array using valid indexes
+    intNumbers.setNumber(0, 10);
+    intNumbers.setNumber(1, 20);
+    intNumbers.setNumber(2, 30);
+    intNumbers.setNumber(3, 40);
+    intNumbers.setNumber(4, 50);
 
-    // Printing the array again to confirm the values changed
-    numbers2.print();
-
-    cout << endl;
-
-    // Testing getNumber() with valid indexes
-    cout << "Number at index 0: " << numbers2.getNumber(0) << endl;
-    cout << "Number at index 2: " << numbers2.getNumber(2) << endl;
-    cout << "Number at index 4: " << numbers2.getNumber(4) << endl;
+    // Prints all values currently stored inside the integer array
+    intNumbers.print();
 
     cout << endl;
 
-    // Testing invalid indexes to make sure the program does not crash
-    numbers2.setNumber(-1, 50);
-    numbers2.setNumber(5, 50);
+    // Retrieves and prints values from several valid indexes
+    cout << "Number at index 0: " << intNumbers.getNumber(0) << endl;
+    cout << "Number at index 2: " << intNumbers.getNumber(2) << endl;
+    cout << "Number at index 4: " << intNumbers.getNumber(4) << endl;
 
     cout << endl;
 
-    // Attempts to retrieve numbers from invalid index locations
-    cout << "Invalid get test: " << numbers2.getNumber(-1) << endl;
-    cout << "Invalid get test: " << numbers2.getNumber(5) << endl;
-
-    cout << endl;
-
-    // Testing the statistical functions with the current values inside numbers2
-    cout << "Minimum value: " << numbers2.getMin() << endl;
-    cout << "Maximum value: " << numbers2.getMax() << endl;
-    cout << "Average value: " << numbers2.getAverage() << endl;
+    // Tests the statistical functions for the integer array
+    cout << "Minimum int value: " << intNumbers.getMin() << endl;
+    cout << "Maximum int value: " << intNumbers.getMax() << endl;
+    cout << "Average int value: " << intNumbers.getAverage() << endl;
 
     printSeperator();
 
-    // Testing random values inside a new NumberArray object
-    NumberArray randomNumbers(10);
+    //
+    // Testing the NumberArray template class with double
+    cout << "Testing NumberArray<double>" << endl;
 
-    randomNumbers.fillRandom(1.0, 100.0);
+    // Creates a decimal array object with a size of 5
+    NumberArray<double> doubleNumbers(5);
 
-    cout << "Randomly filled array:" << endl;
-    randomNumbers.print();
+    // Assigns decimal values into the array
+    doubleNumbers.setNumber(0, 10.5);
+    doubleNumbers.setNumber(1, 20.75);
+    doubleNumbers.setNumber(2, 30.25);
+    doubleNumbers.setNumber(3, 40.5);
+    doubleNumbers.setNumber(4, 50.75);
 
-    cout << "Minimum random value: " << randomNumbers.getMin() << endl;
-    cout << "Maximum random value: " << randomNumbers.getMax() << endl;
-    cout << "Average random value: " << randomNumbers.getAverage() << endl;
+    // Prints all decimal values currently stored inside the array
+    doubleNumbers.print();
+
+    cout << endl;
+
+    // Retrieves and prints decimal values from several valid indexes
+    cout << "Number at index 0: " << doubleNumbers.getNumber(0) << endl;
+    cout << "Number at index 2: " << doubleNumbers.getNumber(2) << endl;
+    cout << "Number at index 4: " << doubleNumbers.getNumber(4) << endl;
+
+    cout << endl;
+
+    // Tests the statistical functions for the decimal array
+    cout << "Minimum double value: " << doubleNumbers.getMin() << endl;
+    cout << "Maximum double value: " << doubleNumbers.getMax() << endl;
+    cout << "Average double value: " << doubleNumbers.getAverage() << endl;
 
     printSeperator();
 
-    // Testing an edge case where the array only has one element
-    NumberArray oneNumber(1);
+    //
+    // Testing randomly generated integer values
+    cout << "Testing random integer values" << endl;
 
-    oneNumber.setNumber(0, -3.5);
-    oneNumber.print();
+    // Creates an integer array that will be filled with random values
+    NumberArray<int> randomInts(5);
 
-    cout << "Minimum value: " << oneNumber.getMin() << endl;
-    cout << "Maximum value: " << oneNumber.getMax() << endl;
-    cout << "Average value: " << oneNumber.getAverage() << endl;
+    // Fills the array with random integers between 1 and 100
+    randomInts.fillRandom(1, 100);
+
+    // Prints the randomly generated values
+    randomInts.print();
+
+    cout << endl;
+
+    // Tests statistical calculations on the random integer array
+    cout << "Minimum random int value: " << randomInts.getMin() << endl;
+    cout << "Maximum random int value: " << randomInts.getMax() << endl;
+    cout << "Average random int value: " << randomInts.getAverage() << endl;
 
     printSeperator();
-    
-    // Testing destructor behavior inside a block scope
+
+    //
+    // Testing randomly generated double values
+    cout << "Testing random double values" << endl;
+
+    // Creates a decimal array that will be filled with random values
+    NumberArray<double> randomDoubles(5);
+
+    // Fills the array with random decimal values between 1.0 and 100.0
+    randomDoubles.fillRandom(1.0, 100.0);
+
+    // Prints the randomly generated decimal values
+    randomDoubles.print();
+
+    cout << endl;
+
+    // Tests statistical calculations on the random decimal array
+    cout << "Minimum random double value: " << randomDoubles.getMin() << endl;
+    cout << "Maximum random double value: " << randomDoubles.getMax() << endl;
+    cout << "Average random double value: " << randomDoubles.getAverage() << endl;
+
+    printSeperator();
+
+    //
+    // Testing the copy constructor
+    cout << "Copy Constructor Test with NumberArray<int>" << endl;
+
+    // Creates a new object by copying the intNumbers object
+    NumberArray<int> copiedInts(intNumbers);
+
+    cout << "Original int array:" << endl;
+    intNumbers.print();
+
+    cout << "Copied int array:" << endl;
+    copiedInts.print();
+
+    cout << endl;
+
+    // Changes the original array after copying to confirm deep copying
+    intNumbers.setNumber(0, 999);
+
+    cout << "Original int array after being changed:" << endl;
+    intNumbers.print();
+
+    // If deep copying worked correctly, copiedInts should not change
+    cout << "Copied int array should stay the same:" << endl;
+    copiedInts.print();
+
+    printSeperator();
+
+    //
+    // Testing the assignment operator
+    cout << "Assignment Operator Test with NumberArray<double>" << endl;
+
+    // Creates another decimal array object with a different size
+    NumberArray<double> assignedDoubles(3);
+
+    cout << "Original double array before assignment:" << endl;
+    doubleNumbers.print();
+
+    cout << "Assigned double array before assignment:" << endl;
+    assignedDoubles.print();
+
+    // Assigns one existing object to another existing object
+    assignedDoubles = doubleNumbers;
+
+    cout << "Assigned double array after assignment:" << endl;
+    assignedDoubles.print();
+
+    cout << endl;
+
+    // Changes the original object after assignment
+    doubleNumbers.setNumber(0, 888.88);
+
+    cout << "Original double array after being changed:" << endl;
+    doubleNumbers.print();
+
+    // If deep copying worked correctly, assignedDoubles should not change
+    cout << "Assigned double array should stay the same:" << endl;
+    assignedDoubles.print();
+
+    printSeperator();
+
+    //
+    // Testing self-assignment protection
+    cout << "Self-Assignment Test" << endl;
+
+    // Assigns the object to itself to verify the program handles it safely
+    assignedDoubles = assignedDoubles;
+
+    cout << "Assigned double array after assigning it to itself:" << endl;
+    assignedDoubles.print();
+
+    printSeperator();
+
+    //
+    // Testing destructor execution inside a block scope
+    cout << "Destructor Block Scope Test" << endl;
+
+    // Creates a temporary object inside a block scope
     {
-        NumberArray temp(5);
+        NumberArray<int> temp(3);
+
+        temp.setNumber(0, 1);
+        temp.setNumber(1, 2);
+        temp.setNumber(2, 3);
+
         temp.print();
     }
 
+    // Once the block ends, the destructor should automatically run
     cout << "The temporary array above should have already called its destructor." << endl;
-
-    printSeperator();
-
-    // Copy constructor testing
-    cout << "Copy Constructor Test:" << endl;
-
-    NumberArray original(5);
-    original.setNumber(0, 10);
-    original.setNumber(1, 20);
-    original.setNumber(2, 30);
-
-    cout << "Original array before copy:" << endl;
-    original.print();
-
-    // This creates a new object by copying original
-    NumberArray copiedArray(original);
-
-    cout << "Copied array after copy constructor:" << endl;
-    copiedArray.print();
-
-    // Change original after copying to prove copiedArray has its own memory
-    original.setNumber(0, 999);
-
-    cout << "Original array after being changed:" << endl;
-    original.print();
-
-    cout << "Copied array should stay the same:" << endl;
-    copiedArray.print();
-
-    printSeperator();
-
-    // Assignment operator testing
-    cout << "Assignment Operator Test:" << endl;
-
-    NumberArray sourceArray(5);
-    sourceArray.setNumber(0, 11);
-    sourceArray.setNumber(1, 22);
-    sourceArray.setNumber(2, 33);
-
-    NumberArray assignedArray(3);
-
-    cout << "Source array before assignment:" << endl;
-    sourceArray.print();
-
-    cout << "Assigned array before assignment:" << endl;
-    assignedArray.print();
-
-    // This copies sourceArray into an already existing object
-    assignedArray = sourceArray;
-
-    cout << "Assigned array after assignment:" << endl;
-    assignedArray.print();
-
-    // Change sourceArray after assignment to prove assignedArray has its own memory
-    sourceArray.setNumber(0, 888);
-
-    cout << "Source array after being changed:" << endl;
-    sourceArray.print();
-
-    cout << "Assigned array should stay the same:" << endl;
-    assignedArray.print();
-
-    printSeperator();
-
-    cout << "Self-Assignment Test:" << endl;
-
-    assignedArray = assignedArray;
-
-    cout << "Assigned array after assigning it to itself:" << endl;
-    assignedArray.print();
 
     printSeperator();
 
