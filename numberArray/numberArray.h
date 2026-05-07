@@ -7,6 +7,7 @@
 #include <iostream>
 #include <random>
 #include <type_traits>
+#include <stdexcept>
 using namespace std;
 
 template <typename T>
@@ -135,13 +136,12 @@ NumberArray<T>::~NumberArray() {
 // Mutator function that sets a value inside the array only if the index is valid
 template <typename T>
 void NumberArray<T>::setNumber(int index, T value) {
-    if (index >= 0 && index < size) {
-        data[index] = value;
-        cout << "Index location " << index << " valid, and has been assigned " << value << "." << endl;
+    if (index < 0 || index >= size) {
+        throw out_of_range("Invalid index in setNumber().");
     }
-    else {
-        cout << "Invalid index location called at " << index << ", input " << value << " cannot be assigned." << endl;
-    }
+
+    data[index] = value;
+    cout << "Index location " << index << " valid, and has been assigned " << value << "." << endl;
 }
 
 // Mutator function that fills the array with random numbers between a minimum and maximum value
@@ -171,13 +171,11 @@ void NumberArray<T>::fillRandom(T minValue, T maxValue) {
 // Accessor function that returns a value from the array only if the index is valid
 template <typename T>
 T NumberArray<T>::getNumber(int index) const {
-    if (index >= 0 && index < size) {
-        return data[index];
+    if (index < 0 || index >= size) {
+        throw out_of_range("Invalid index in getNumber().");
     }
-    else {
-        cout << "Failed to get number due to invalid index." << endl;
-        return 0;
-    }
+
+    return data[index];
 }
 
 // Accessor function that returns the smallest number in the array
